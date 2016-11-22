@@ -1,0 +1,43 @@
+require: rubocop-rspec
+
+Metrics/LineLength:
+  Max: 120
+Style/Lambda:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false
+Style/GuardClause:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/AbcSize:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+RSpec/InstanceVariable:
+  Enabled: false
+RSpec/ExampleLength:
+  Enabled: false
+RSpec/AnyInstance:
+  Enabled: false
+Style/RegexpLiteral:
+  Enabled: false
+Style/WordArray:
+  Enabled: false
+RSpec/DescribeClass:
+  Enabled: false
+RSpec/DescribedClass:
+  Enabled: false
+Style/NumericLiterals:
+  Enabled: false
+Metrics/ParameterLists:
+  Enabled: false
+AllCops:
+  Include:
+    - '**/*.rb'

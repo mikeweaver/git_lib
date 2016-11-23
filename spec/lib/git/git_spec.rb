@@ -33,6 +33,13 @@ describe 'Git::Git' do
     expect(git.repository_path).to eq('/tmp/git/repository_name')
   end
 
+  it 'can be created with a different cache path' do
+    git = Git::Git.new('repository_name', git_cache_path: './mycache')
+
+    expect(git.repository_url).to eq('git@github.com:repository_name.git')
+    expect(git.repository_path).to eq('./mycache/repository_name')
+  end
+
   context 'with a git repository' do
     before do
       @git = Git::Git.new('repository_name')

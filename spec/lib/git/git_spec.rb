@@ -92,6 +92,14 @@ describe 'Git::Git' do
         expect(@git.push).to eq(true)
       end
 
+      it 'can push a branch using dry run' do
+        response = \
+          "To #{@git.repository_url}" \
+          '19087ab..9cdd9db  master -> master'
+        mock_execute(response, 1, expected_command: '/usr/bin/git push --dry-run origin')
+        expect(@git.push(dry_run: true)).to eq(true)
+      end
+
       it 'can detect if a push results in a no-op' do
         mock_execute("Everything up-to-date\n", 1)
         expect(@git.push).to eq(false)

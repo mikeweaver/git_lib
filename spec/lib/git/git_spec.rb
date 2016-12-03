@@ -380,7 +380,7 @@ describe 'Git::Git' do
         mock_execute(
           mocked_output,
           1,
-          expected_command: "/usr/bin/git log --format='%H\t%an\t%ae\t%aI\t%s' --no-color origin/ancestor_branch..origin/branch"
+          expected_command: "/usr/bin/git log --format=%H\t%an\t%ae\t%aI\t%s --no-color origin/ancestor_branch..origin/branch"
         )
         expect(@git.commit_diff_refs('branch', 'ancestor_branch')).to eq(expected_array)
       end
@@ -400,7 +400,7 @@ describe 'Git::Git' do
         mock_execute(
           '',
           1,
-          expected_command: "/usr/bin/git log --format='%H\t%an\t%ae\t%aI\t%s' --no-color origin/ancestor_branch..e2a7e607745d63da4d7f8486e0619e91a410f796"
+          expected_command: "/usr/bin/git log --format=%H\t%an\t%ae\t%aI\t%s --no-color origin/ancestor_branch..e2a7e607745d63da4d7f8486e0619e91a410f796"
         )
         @git.commit_diff_refs('e2a7e607745d63da4d7f8486e0619e91a410f796', 'ancestor_branch')
       end
@@ -409,7 +409,7 @@ describe 'Git::Git' do
         mock_execute(
           '',
           1,
-          expected_command: "/usr/bin/git log --format='%H\t%an\t%ae\t%aI\t%s' --no-color c5e8de4eb36a2d1b9f66543966ede9ce9cc28a89..e2a7e607745d63da4d7f8486e0619e91a410f796"
+          expected_command: "/usr/bin/git log --format=%H\t%an\t%ae\t%aI\t%s --no-color c5e8de4eb36a2d1b9f66543966ede9ce9cc28a89..e2a7e607745d63da4d7f8486e0619e91a410f796"
         )
         @git.commit_diff_refs('e2a7e607745d63da4d7f8486e0619e91a410f796', 'c5e8de4eb36a2d1b9f66543966ede9ce9cc28a89')
       end
@@ -418,7 +418,7 @@ describe 'Git::Git' do
         mock_execute(
           '',
           1,
-          expected_command: "/usr/bin/git log --format='%H\t%an\t%ae\t%aI\t%s' --no-color origin/ancestor\\`_branch..origin/branch\\`name"
+          expected_command: "/usr/bin/git log --format=%H\t%an\t%ae\t%aI\t%s --no-color origin/ancestor\\`_branch..origin/branch\\`name"
         )
         @git.commit_diff_refs('branch`name', 'ancestor`_branch')
       end

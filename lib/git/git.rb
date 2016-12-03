@@ -155,7 +155,7 @@ module Git
       ancestor_ref_prefix = 'origin/' unless self.class.is_git_sha?(ancestor_ref)
 
       raw_output = execute(
-        "log --format='%H\t%an\t%ae\t%aI\t%s' " \
+        "log --format=%H\t%an\t%ae\t%aI\t%s " \
         "--no-color #{ancestor_ref_prefix}#{Shellwords.escape(ancestor_ref)}..#{ref_prefix}#{Shellwords.escape(ref)}"
       )
       raw_output.split("\n").map do |row|

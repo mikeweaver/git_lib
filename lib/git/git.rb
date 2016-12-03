@@ -1,4 +1,5 @@
 require 'open3'
+require 'shellwords'
 require 'active_support/core_ext/object/blank'
 require 'active_support/core_ext/time/calculations'
 require_relative './git_branch.rb'

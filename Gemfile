@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'activesupport', '4.2.7.1'
+gem 'activesupport', '4.2.11.1'
+gem 'json',          '1.8.5'
 
 group :test do
   gem 'rake'

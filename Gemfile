@@ -2,6 +2,8 @@
 
 source 'https://rubygems.org'
 
+gemspec
+
 gem 'activesupport', '>= 5.2.4.3'
 gem 'bundler',       '~> 1.17'
 gem 'bundler-audit', require: false

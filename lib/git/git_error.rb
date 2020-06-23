@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Git
   class GitError < StandardError
     attr_reader :command, :exit_code, :error_message

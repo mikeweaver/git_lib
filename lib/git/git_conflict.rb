@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Git
   class GitConflict
     attr_reader :repository_name, :branch_a, :branch_b, :conflicting_files

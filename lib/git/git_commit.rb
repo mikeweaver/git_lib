@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Git
   class GitCommit
     attr_reader :sha, :message, :commit_date, :author_name, :author_email

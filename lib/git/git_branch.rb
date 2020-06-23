@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Git
   class GitBranch
     attr_reader :repository_name, :name, :last_modified_date, :author_name, :author_email

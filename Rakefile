@@ -1,4 +1,5 @@
 #!/usr/bin/env rake
+
 require 'rspec/core/rake_task'
 require 'rubocop/rake_task'
 require 'coveralls/rake/task'

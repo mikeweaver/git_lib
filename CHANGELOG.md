@@ -5,6 +5,9 @@ Inspired by [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 Note: this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [1.2.0] - Unreleased
+### Added
+- Added support for Rails 5 and 6
+
 ### Changed
 - Modernized gemspec and Gemfile some more.
 - Allow Activesupport > 4.

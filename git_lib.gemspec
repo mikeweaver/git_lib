@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.version       = Git::VERSION
   spec.authors       = ["Invoca Development"]
   spec.email         = ["development@invoca.com"]
-  spec.summary       = %q{Git wrapper library.}
-  spec.homepage      = ""
+  spec.summary       = "Git wrapper library."
+  spec.homepage      = "https://github.com/Invoca/git_lib"
 
   spec.metadata = {
     'allowed_push_host' => "https://rubygems.org"

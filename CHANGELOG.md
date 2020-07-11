@@ -6,10 +6,11 @@ Note: this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0
 
 ## [1.2.0] - Unreleased
 ### Added
-- Added support for Rails 5 and 6
+- Add support for Rails 5 and 6.
+- Add Appraisal and Jenkinsfile to test Rails 4, 5, 6.
 
 ### Changed
-- Modernized gemspec and Gemfile some more.
+- Modernize gemspec and Gemfile some more.
 - Allow Activesupport > 4.
 
 ## [1.1.1] - 2020-06-23

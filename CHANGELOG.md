@@ -5,8 +5,12 @@ Inspired by [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 Note: this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [1.2.0] - Unreleased
+### Added
+- Add support for Rails 5 and 6.
+- Add Appraisal and Jenkinsfile to test Rails 4, 5, 6.
+
 ### Changed
-- Modernized gemspec and Gemfile some more.
+- Modernize gemspec and Gemfile some more.
 - Allow Activesupport > 4.
 
 ## [1.1.1] - 2020-06-23

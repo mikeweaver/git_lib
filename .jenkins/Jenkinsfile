@@ -1,0 +1,72 @@
+#!/usr/bin/groovy
+@Library('jenkins-pipeline@v0.4.5')
+import com.invoca.docker.*;
+
+pipeline {
+  agent {
+    kubernetes {
+      defaultContainer "ruby"
+      yamlFile ".jenkins/ruby_build_pod.yml"
+    }
+  }
+
+  environment {
+    GITHUB_TOKEN = credentials('github_token')
+    BUNDLE_GEM__FURY__IO = credentials('gemfury_deploy_token')
+  }
+
+  stages {
+    stage('Setup') {
+      steps {
+        updateGitHubStatus('clean-build', 'pending', 'Running unit tests...')
+        sh 'bundle install'
+        sh 'bundle exec appraisal install'
+      }
+    }
+
+    stage('Appraisals') {
+      parallel {
+        stage('Current') {
+          environment { JUNIT_OUTPUT = 'spec/reports/current/rspec.xml' }
+          steps       { sh 'bundle exec rspec' }
+          post        { always { junit JUNIT_OUTPUT } }
+        }
+
+        stage('Rails 4') {
+          environment { JUNIT_OUTPUT = 'spec/reports/rails-4/rspec.xml' }
+          steps       { sh 'bundle exec appraisal rails-4 rspec' }
+          post        { always { junit JUNIT_OUTPUT } }
+        }
+
+        stage('Rails 5') {
+          environment { JUNIT_OUTPUT = 'spec/reports/rails-5/rspec.xml' }
+          steps       { sh 'bundle exec appraisal rails-5 rspec' }
+          post        { always { junit JUNIT_OUTPUT } }
+        }
+
+        stage('Rails 6') {
+          environment { JUNIT_OUTPUT = 'spec/reports/rails-6/rspec.xml' }
+          steps       { sh 'bundle exec appraisal rails-6 rspec' }
+          post        { always { junit JUNIT_OUTPUT } }
+        }
+      }
+    }
+  }
+
+  post {
+    success { updateGitHubStatus('clean-build', 'success', 'Unit tests passed') }
+    failure { updateGitHubStatus('clean-build', 'failure', 'Unit tests failed') }
+  }
+}
+
+void updateGitHubStatus(String context, String status, String description) {
+  gitHubStatus([
+    repoSlug:    'Invoca/git_lib',
+    sha:         env.GIT_COMMIT,
+    description: description,
+    context:     context,
+    targetURL:   env.RUN_DISPLAY_URL,
+    token:       env.GITHUB_TOKEN,
+    status:      status
+  ])
+}

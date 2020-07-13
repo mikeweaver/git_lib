@@ -49,3 +49,5 @@ shared/
 !/log/.keep
 /tmp
 /log
+
+gemfiles/*.lock

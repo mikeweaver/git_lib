@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+  jenkins/git-lib: 'true'
+  namespace: jenkins
+  name: git-lib
+spec:
+  containers:
+  - name: ruby
+    image: ruby:2.6.1
+    tty: true
+    resources:
+    requests:
+      memory: "100Mi"
+    command:
+      - cat
+

@@ -163,7 +163,7 @@ module Git
       )
       raw_output.split("\n").map do |row|
         commit_data = row.split("\t")
-        GitCommit.new(commit_data[0], commit_data[4], DateTime.iso8601(commit_data[3]), commit_data[1], commit_data[2])
+        GitCommit.new(commit_data[0], commit_data[4], DateTime.iso8601(commit_data[3]), commit_data[1], commit_data[2], repository_name: @repository_name)
       end
     end
 

@@ -28,15 +28,17 @@ RSpec.describe 'Git::Git' do
     end
   end
 
+  let(:repository_name) { 'repository_name' }
+
   it 'can be created' do
-    git = Git::Git.new('repository_name')
+    git = Git::Git.new(repository_name)
 
     expect(git.repository_url).to eq('git@github.com:repository_name.git')
     expect(git.repository_path).to eq('/tmp/git/repository_name')
   end
 
   it 'can be created with a different cache path' do
-    git = Git::Git.new('repository_name', git_cache_path: './mycache')
+    git = Git::Git.new(repository_name, git_cache_path: './mycache')
 
     expect(git.repository_url).to eq('git@github.com:repository_name.git')
     expect(git.repository_path).to eq('./mycache/repository_name')
@@ -44,7 +46,7 @@ RSpec.describe 'Git::Git' do
 
   context 'with a git repository' do
     before do
-      @git = Git::Git.new('repository_name')
+      @git = Git::Git.new(repository_name)
     end
 
     it 'can execute a command' do
@@ -145,21 +147,21 @@ RSpec.describe 'Git::Git' do
 
         branch_list = []
         branch_list << Git::GitBranch.new(
-          'repository_name',
+          repository_name,
           'test_1',
           DateTime.iso8601('2015-10-19T17:58:24-0700'),
           'Nicholas Ellis',
           'nellis@invoca.com'
         )
         branch_list << Git::GitBranch.new(
-          'repository_name',
+          repository_name,
           'test_build',
           DateTime.iso8601('2015-10-19T15:03:22-0700'),
           'Bob Smith',
           'bob@invoca.com'
         )
         branch_list << Git::GitBranch.new(
-          'repository_name',
+          repository_name,
           'test_build_b',
           DateTime.iso8601('2015-10-19T16:52:40-0700'),
           'Nicholas Ellis',
@@ -186,7 +188,7 @@ RSpec.describe 'Git::Git' do
         )
 
         conflict = Git::GitConflict.new(
-          'repository_name',
+          repository_name,
           '91/eb/WEB-1723_Ringswitch_DB_Conn_Loss',
           '85/t/trello_adwords_dashboard_tiles_auto_adjust_font_size',
           ['test/workers/adwords_detail_worker_test.rb', 'pegasus/backdraft/pegasus_dashboard/spec/views/call_cost_tile_spec.js']
@@ -215,7 +217,7 @@ RSpec.describe 'Git::Git' do
         expect(@git).to receive(:reset)
 
         conflict = Git::GitConflict.new(
-          'repository_name',
+          repository_name,
           '91/eb/WEB-1723_Ringswitch_DB_Conn_Loss',
           '85/t/trello_adwords_dashboard_tiles_auto_adjust_font_size',
           [
@@ -377,8 +379,8 @@ RSpec.describe 'Git::Git' do
       it 'can diff a branch' do
         mocked_output = ["efd778098239838c165ffab2f12ad293f32824c8\tAuthor 1\tauthor1@email.com\t2016-07-14T10:09:45-07:00\tMerge branch 'production'\n",
                          "667f3e5347c48c04663209682642fd8d6d93fde2\tAuthor 2\tauthor2@email.com\t2016-07-14T16:46:35-07:00\tMerge pull request #5584 from Owner/repo/dimension_repair\n"].join
-        expected_array = [Git::GitCommit.new('efd778098239838c165ffab2f12ad293f32824c8', "Merge branch 'production'", nil, 'Author 1', 'author1@email.com'),
-                          Git::GitCommit.new('667f3e5347c48c04663209682642fd8d6d93fde2', 'Merge pull request #5584 from Owner/repo/dimension_repair', nil, 'Author 2', 'author2@email.com')]
+        expected_array = [Git::GitCommit.new('efd778098239838c165ffab2f12ad293f32824c8', "Merge branch 'production'", nil, 'Author 1', 'author1@email.com', repository_name: repository_name),
+                          Git::GitCommit.new('667f3e5347c48c04663209682642fd8d6d93fde2', 'Merge pull request #5584 from Owner/repo/dimension_repair', nil, 'Author 2', 'author2@email.com', repository_name: repository_name)]
         mock_execute(
           mocked_output,
           1,

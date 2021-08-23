@@ -3,7 +3,7 @@
 require 'spec_helper'
 require_relative '../../../lib/git/git_error.rb'
 
-describe 'Git::GitError' do
+RSpec.describe 'Git::GitError' do
   it 'can be raised' do
     expect { raise Git::GitError.new('command', 200, 'error_message') }.to \
       raise_exception(Git::GitError, "Git command command failed with exit code 200. Message:\nerror_message")

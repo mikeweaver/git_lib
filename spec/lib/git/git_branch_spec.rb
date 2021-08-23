@@ -3,7 +3,7 @@
 require 'spec_helper'
 require_relative '../../../lib/git/git_branch.rb'
 
-describe 'Git::GitBranch' do
+RSpec.describe 'Git::GitBranch' do
   it 'can be created' do
     last_modified_date = Time.current
     branch = Git::GitBranch.new('repository_name', 'name', last_modified_date, 'author_name', 'author@email.com')

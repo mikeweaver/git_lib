@@ -4,7 +4,7 @@ require 'spec_helper'
 require_relative '../../../lib/git/git.rb'
 
 # rubocop:disable Metrics/LineLength
-describe 'Git::Git' do
+RSpec.describe 'Git::Git' do
   include FakeFS::SpecHelpers
 
   def create_mock_open_status(status)

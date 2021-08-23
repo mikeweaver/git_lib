@@ -3,7 +3,7 @@
 require 'spec_helper'
 require_relative '../../../lib/git/git_conflict.rb'
 
-describe 'Git::GitConflict' do
+RSpec.describe 'Git::GitConflict' do
   it 'can be created' do
     conflict = Git::GitConflict.new('repository_name', 'branch_a', 'branch_b', ['file1', 'file2'])
 

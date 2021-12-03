@@ -150,6 +150,10 @@ module Git
       raw_output.split("\n")
     end
 
+    def sha_list_for_ref_range(ref, ancestor_ref, fetch: false)
+      commit_diff_refs(ref, ancestor_ref, fetch: fetch).map(&:sha)
+    end
+
     def commit_diff_refs(ref, ancestor_ref, fetch: false)
       if fetch
         fetch_all

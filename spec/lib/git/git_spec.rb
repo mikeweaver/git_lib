@@ -426,6 +426,18 @@ RSpec.describe 'Git::Git' do
         )
         @git.commit_diff_refs('branch`name', 'ancestor`_branch')
       end
+
+      it 'can get a list of shas given start and end refs' do
+        mocked_output = ["efd778098239838c165ffab2f12ad293f32824c8\tAuthor 1\tauthor1@email.com\t2016-07-14T10:09:45-07:00\tMerge branch 'production'\n",
+                         "667f3e5347c48c04663209682642fd8d6d93fde2\tAuthor 2\tauthor2@email.com\t2016-07-14T16:46:35-07:00\tMerge pull request #5584 from Owner/repo/dimension_repair\n"].join
+        expected_array = ["efd778098239838c165ffab2f12ad293f32824c8", "667f3e5347c48c04663209682642fd8d6d93fde2"]
+        mock_execute(
+          mocked_output,
+          1,
+          expected_command: "/usr/bin/git log --format=%H\t%an\t%ae\t%aI\t%s --no-color efd778098239838c165ffab2f12ad293f32824c8..667f3e5347c48c04663209682642fd8d6d93fde2"
+        )
+        expect(@git.sha_list_for_ref_range("667f3e5347c48c04663209682642fd8d6d93fde2", "efd778098239838c165ffab2f12ad293f32824c8")).to eq(expected_array)
+      end
     end
 
     describe 'get_current_branch_name' do

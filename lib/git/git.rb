@@ -158,13 +158,17 @@ module Git
       if fetch
         fetch_all
       end
-      ref_prefix = 'origin/' unless self.class.is_git_sha?(ref)
+
+      ref_prefix          = 'origin/' unless self.class.is_git_sha?(ref)
       ancestor_ref_prefix = 'origin/' unless self.class.is_git_sha?(ancestor_ref)
 
-      raw_output = execute(
-        "log --format=%H\t%an\t%ae\t%aI\t%s " \
-        "--no-color #{ancestor_ref_prefix}#{Shellwords.escape(ancestor_ref)}..#{ref_prefix}#{Shellwords.escape(ref)}"
-      )
+      sha_range = if ancestor_ref
+                    "#{ancestor_ref_prefix}#{Shellwords.escape(ancestor_ref)}..#{ref_prefix}#{Shellwords.escape(ref)}"
+                  else
+                    "#{ref_prefix}#{Shellwords.escape(ref)}"
+                  end
+
+      raw_output = execute("log --format=%H\t%an\t%ae\t%aI\t%s --no-color #{sha_range}")
       raw_output.split("\n").map do |row|
         commit_data = row.split("\t")
         GitCommit.new(commit_data[0], commit_data[4], DateTime.iso8601(commit_data[3]), commit_data[1], commit_data[2], repository_name: @repository_name)
